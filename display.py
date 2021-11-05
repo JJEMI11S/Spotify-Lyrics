@@ -5,16 +5,16 @@ from tkinter import *
 from tkinter import messagebox
 
 
-
-cool = pyautogui.locateCenterOnScreen("search.png")
-while cool == None:
-    cool = pyautogui.locateCenterOnScreen("useless.png")
+# get position of spotify window on screen
+position = pyautogui.locateCenterOnScreen("search.png")
+while position == None:
+    position = pyautogui.locateCenterOnScreen("useless.png")
 
 
 class App():
     def __init__(self):
         self.root = Tk()
-        self.root.geometry('%dx%d+%d+%d' % (390, 50, cool.x - 88, cool.y - 15))
+        self.root.geometry('%dx%d+%d+%d' % (390, 50, position.x - 88, position.y - 15))
         self.root.overrideredirect(1)
         self.img = PhotoImage(file="cover.png")
         self.frame = Frame(self.root, width=390, height=50, bg="black",
@@ -22,10 +22,10 @@ class App():
         self.frame.pack_propagate(False)
         self.frame.grid()
         self.toggle_lyrics = False
-        self.chez = Label(self.frame, image=self.img, bg="black")
-        self.chez.grid(column=1, row=1)
+        self.background = Label(self.frame, image=self.img, bg="black")
+        self.background.grid(column=1, row=1)
         self.bQuit = Button(self.frame, text="Lyrics", fg="white",bg="black", borderwidth=0,
-                            command=self.hello)
+                            command=self.lyrics_show)
         self.bQuit.grid(column=2, row=1, sticky="N")
         # photo = PhotoImage(file="lyricalgenius.png")
         #
@@ -33,13 +33,13 @@ class App():
         #                      command=self.hello)
         # self.bHello.pack(pady=20, side=TOP)
 
-    def hello(self):
+    def lyrics_show(self):
         if self.toggle_lyrics == False:
             self.toggle_lyrics = True
             lyrics = lyriccheck()
             self.newWindow = Toplevel(self.root)
             self.newWindow.title("New Window")
-            self.newWindow.geometry('%dx%d+%d+%d' % (480, 833, cool.x-88, cool.y+20))
+            self.newWindow.geometry('%dx%d+%d+%d' % (480, 833, position.x-88, position.y+20))
             self.newWindow.overrideredirect(1)
             frame = Frame(self.newWindow, width=480, height=833, bg="black",
                         borderwidth=0, relief=RAISED)

@@ -37,7 +37,9 @@ class FindSong:
         return(data)
 
     def call_refresh(self):
-
+        '''
+        over time token expires so this allows me to access spotify api at anytime even after 30min expiry
+        '''
         print("refreshing token")
 
         refreshCaller = Refresh()

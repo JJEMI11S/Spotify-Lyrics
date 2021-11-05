@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 lyrics = "error"
 current_song = {}
 def lyriccheck():
+    '''
+    get lyrics of song and stores in lyrics
+    '''
     info = s.search()
     link = info[1]
     if len(link) > 0:
